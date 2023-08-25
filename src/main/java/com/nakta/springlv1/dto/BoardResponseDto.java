@@ -1,5 +1,6 @@
 package com.nakta.springlv1.dto;
 
+import com.nakta.springlv1.entity.Board;
 import lombok.Getter;
 
 @Getter
@@ -18,5 +19,14 @@ public class BoardResponseDto {
         this.content = content;
         this.password = password;
         this.date = date;
+    }
+
+    public BoardResponseDto(Board board) {
+        this.id = board.getId();
+        this.title = board.getTitle();
+        this.userName = board.getUserName();
+        this.content = board.getContent();
+        this.password = board.getPassword();
+        this.date = board.getDate();
     }
 }

@@ -68,7 +68,7 @@ public class BoardRepository {
     }
 
     public void delete(Long id) {
-        String sql = "DELETE * FROM board WHERE id = ?";
+        String sql = "DELETE FROM board WHERE id = ?";
         jdbcTemplate.update(sql, id);
 
     }
