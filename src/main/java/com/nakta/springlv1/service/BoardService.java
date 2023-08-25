@@ -30,6 +30,7 @@ public class BoardService {
         BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
         Board board = boardRepository.findById(id);
         if (board != null) {
+            board.setId(id);
             return new BoardResponseDto(board);
         } else {
             throw new IllegalArgumentException("선택한 게시글 id는 존재하지 않음");

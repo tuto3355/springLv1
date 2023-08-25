@@ -60,11 +60,11 @@ public class BoardRepository {
     }
 
     public void modify(Long id, BoardRequestDto requestDto) {
-        String sql = "UPDATE board SET title = ?, userName  = ?, content  = ?, " +
+        String sql = "UPDATE board SET title = ?, userName  = ?, content  = ?," +
                 "password  = ?, date  = ? WHERE id = ?";
         jdbcTemplate.update(sql, requestDto.getTitle(), requestDto.getUserName()
                 , requestDto.getContent(), requestDto.getPassword(), requestDto.getDate()
-                , requestDto.getId());
+                , id);
     }
 
     public void delete(Long id) {
