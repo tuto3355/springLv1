@@ -14,8 +14,8 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    public BoardController(JdbcTemplate jdbcTemplate) {
-        this.boardService = new BoardService(jdbcTemplate);
+    public BoardController(BoardService boardService) {
+        this.boardService = boardService;
     }
 
     @PostMapping("/board")

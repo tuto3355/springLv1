@@ -5,14 +5,16 @@ import com.nakta.springlv1.dto.BoardResponseDto;
 import com.nakta.springlv1.entity.Board;
 import com.nakta.springlv1.repository.BoardRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public BoardService(JdbcTemplate jdbcTemplate) {
-        this.boardRepository = new BoardRepository(jdbcTemplate);
+    public BoardService(BoardRepository boardRepository) {
+        this.boardRepository = boardRepository;
     }
 
     public BoardResponseDto createBoard(BoardRequestDto requestDto) {
