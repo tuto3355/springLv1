@@ -21,7 +21,7 @@ public class BoardRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Board save(Board board) {//왜 얜 Board board??
+    public Board save(Board board) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         String sql = "INSERT INTO board (title,userName,content,password,date) VALUES (?,?,?,?,?)";

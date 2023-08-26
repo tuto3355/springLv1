@@ -24,7 +24,9 @@ public class BoardService {
     }
     public List<BoardResponseDto> getAllBoard() {
         BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
-        return boardRepository.findAll();
+        List<BoardResponseDto> list = boardRepository.findAll();
+        list.sort((x,y)-> (y.getDate().compareTo(x.getDate())));
+        return list;
     }
     public BoardResponseDto getOneBoard(Long id) {
         BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
@@ -40,8 +42,12 @@ public class BoardService {
         BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
         Board board = boardRepository.findById(id);
         if (board != null) {
-            boardRepository.modify(id, requestDto);
-            return id;
+            if (board.getPassword().equals(requestDto.getPassword())) {
+                boardRepository.modify(id, requestDto);
+                return id;
+            } else {
+                throw new IllegalArgumentException("비밀번호가 일치하지 않음");
+            }
         } else {
             throw new IllegalArgumentException("선택한 게시글 id는 존재하지 않음");
         }
