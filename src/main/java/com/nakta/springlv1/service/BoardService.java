@@ -9,27 +9,23 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
 
 public class BoardService {
-
-    private final JdbcTemplate jdbcTemplate;
+    private final BoardRepository boardRepository;
 
     public BoardService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.boardRepository = new BoardRepository(jdbcTemplate);
     }
 
     public BoardResponseDto createBoard(BoardRequestDto requestDto) {
         Board board = new Board(requestDto);
-        BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
         Board newboard = boardRepository.save(board);
         return new BoardResponseDto(newboard);
     }
     public List<BoardResponseDto> getAllBoard() {
-        BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
         List<BoardResponseDto> list = boardRepository.findAll();
         list.sort((x,y)-> (y.getDate().compareTo(x.getDate())));
         return list;
     }
     public BoardResponseDto getOneBoard(Long id) {
-        BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
         Board board = boardRepository.findById(id);
         if (board != null) {
             board.setId(id);
@@ -39,7 +35,6 @@ public class BoardService {
         }
     }
     public Long modifyBoard(Long id, BoardRequestDto requestDto) {
-        BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
         Board board = boardRepository.findById(id);
         if (board != null) {
             if (board.getPassword().equals(requestDto.getPassword())) {
@@ -53,7 +48,6 @@ public class BoardService {
         }
     }
     public Long deleteBoard(Long id) {
-        BoardRepository boardRepository = new BoardRepository(jdbcTemplate);
         Board board = boardRepository.findById(id);
         if (board != null) {
             boardRepository.delete(id);
