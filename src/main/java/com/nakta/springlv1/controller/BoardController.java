@@ -3,7 +3,6 @@ package com.nakta.springlv1.controller;
 import com.nakta.springlv1.dto.BoardRequestDto;
 import com.nakta.springlv1.dto.BoardResponseDto;
 import com.nakta.springlv1.service.BoardService;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

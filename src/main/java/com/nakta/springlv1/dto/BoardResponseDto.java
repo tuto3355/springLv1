@@ -10,16 +10,6 @@ public class BoardResponseDto {
     private String userName;
     private String content;
     private String password;
-    private String date;
-
-    public BoardResponseDto(Long id, String title, String userName, String content, String password, String date) {
-        this.id = id;
-        this.title = title;
-        this.userName = userName;
-        this.content = content;
-        this.password = password;
-        this.date = date;
-    }
 
     public BoardResponseDto(Board board) {
         this.id = board.getId();
@@ -27,6 +17,5 @@ public class BoardResponseDto {
         this.userName = board.getUserName();
         this.content = board.getContent();
         this.password = board.getPassword();
-        this.date = board.getDate();
     }
 }

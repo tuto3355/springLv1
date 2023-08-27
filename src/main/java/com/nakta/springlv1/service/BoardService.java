@@ -6,6 +6,7 @@ import com.nakta.springlv1.entity.Board;
 import com.nakta.springlv1.repository.BoardRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,39 +24,31 @@ public class BoardService {
         return new BoardResponseDto(newboard);
     }
     public List<BoardResponseDto> getAllBoard() {
-        List<BoardResponseDto> list = boardRepository.findAll();
-        list.sort((x,y)-> (y.getDate().compareTo(x.getDate())));
-        return list;
+        return boardRepository.findAll().stream().map(BoardResponseDto::new).toList();
     }
     public BoardResponseDto getOneBoard(Long id) {
-        Board board = boardRepository.findById(id);
-        if (board != null) {
-            board.setId(id);
-            return new BoardResponseDto(board);
-        } else {
-            throw new IllegalArgumentException("선택한 게시글 id는 존재하지 않음");
-        }
+        Board board = findById(id);
+        return new BoardResponseDto(board);
     }
+    @Transactional
     public Long modifyBoard(Long id, BoardRequestDto requestDto) {
-        Board board = boardRepository.findById(id);
-        if (board != null) {
+        Board board = findById(id);
             if (board.getPassword().equals(requestDto.getPassword())) {
-                boardRepository.modify(id, requestDto);
+                board.update(requestDto);
                 return id;
             } else {
                 throw new IllegalArgumentException("비밀번호가 일치하지 않음");
             }
-        } else {
-            throw new IllegalArgumentException("선택한 게시글 id는 존재하지 않음");
-        }
     }
     public Long deleteBoard(Long id) {
-        Board board = boardRepository.findById(id);
-        if (board != null) {
-            boardRepository.delete(id);
-            return id;
-        } else {
-            throw new IllegalArgumentException("선택한 게시글 id는 존재하지 않음");
-        }
+        Board board = findById(id);
+        boardRepository.deleteById(id);
+        return id;
+    }
+
+    private Board findById(Long id) {
+        return boardRepository.findById(id).orElseThrow(() ->
+            new IllegalArgumentException("선택한 메모는 존재하지 않습니다.")
+        );
     }
 }
