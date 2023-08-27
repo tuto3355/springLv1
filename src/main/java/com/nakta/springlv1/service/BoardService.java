@@ -24,7 +24,7 @@ public class BoardService {
         return new BoardResponseDto(newboard);
     }
     public List<BoardResponseDto> getAllBoard() {
-        return boardRepository.findAll().stream().map(BoardResponseDto::new).toList();
+        return boardRepository.findAllByOrderByModifiedAtDesc().stream().map(BoardResponseDto::new).toList();
     }
     public BoardResponseDto getOneBoard(Long id) {
         Board board = findById(id);
