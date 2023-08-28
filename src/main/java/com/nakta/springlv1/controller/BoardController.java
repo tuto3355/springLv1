@@ -32,13 +32,13 @@ public class BoardController {
     }
 
     @PutMapping("/board/{id}")
-    public Long modifyBoard(@PathVariable Long id, @RequestBody BoardRequestDto requestDto) {
+    public BoardResponseDto modifyBoard(@PathVariable Long id, @RequestBody BoardRequestDto requestDto) {
         return boardService.modifyBoard(id, requestDto);
     }
 
     @DeleteMapping("/board/{id}")
-    public Long deleteBoard(@PathVariable Long id) {
-        return boardService.deleteBoard(id);
+    public String deleteBoard(@PathVariable Long id, @RequestBody String password) {
+        return boardService.deleteBoard(id,password);
     }
 
 }

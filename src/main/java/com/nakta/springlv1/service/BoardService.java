@@ -23,32 +23,40 @@ public class BoardService {
         Board newboard = boardRepository.save(board);
         return new BoardResponseDto(newboard);
     }
+
     public List<BoardResponseDto> getAllBoard() {
         return boardRepository.findAllByOrderByModifiedAtDesc().stream().map(BoardResponseDto::new).toList();
     }
+
     public BoardResponseDto getOneBoard(Long id) {
         Board board = findById(id);
         return new BoardResponseDto(board);
     }
+
     @Transactional
-    public Long modifyBoard(Long id, BoardRequestDto requestDto) {
+    public BoardResponseDto modifyBoard(Long id, BoardRequestDto requestDto) {
         Board board = findById(id);
-            if (board.getPassword().equals(requestDto.getPassword())) {
-                board.update(requestDto);
-                return id;
-            } else {
-                throw new IllegalArgumentException("비밀번호가 일치하지 않음");
-            }
+        if (board.getPassword().equals(requestDto.getPassword())) {
+            board.update(requestDto);
+            return new BoardResponseDto(board);
+        } else {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않음");
+        }
     }
-    public Long deleteBoard(Long id) {
+
+    public String deleteBoard(Long id, String password) {
         Board board = findById(id);
-        boardRepository.deleteById(id);
-        return id;
+        if (board.getPassword().equals(password)) {
+            boardRepository.deleteById(id);
+            return "{\"message\": \"삭제를 성공하였음\"}";
+        } else {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않음");
+        }
     }
 
     private Board findById(Long id) {
         return boardRepository.findById(id).orElseThrow(() ->
-            new IllegalArgumentException("선택한 메모는 존재하지 않습니다.")
+                new IllegalArgumentException("선택한 메모는 존재하지 않습니다.")
         );
     }
 }
