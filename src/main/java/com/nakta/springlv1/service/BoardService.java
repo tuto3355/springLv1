@@ -44,9 +44,9 @@ public class BoardService {
         }
     }
 
-    public String deleteBoard(Long id, String password) {
+    public String deleteBoard(Long id, BoardRequestDto requestDto) {
         Board board = findById(id);
-        if (board.getPassword().equals(password)) {
+        if (board.getPassword().equals(requestDto.getPassword())) {
             boardRepository.deleteById(id);
             return "{\"message\": \"삭제를 성공하였음\"}";
         } else {
