@@ -5,5 +5,4 @@ import lombok.Getter;
 public class LoginRequestDto {
     String username;
     String password;
-
 }

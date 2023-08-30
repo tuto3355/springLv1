@@ -22,12 +22,11 @@ public class UserController {
 
     @PostMapping("/user/signup")
     public String signup(@Valid @RequestBody SignupRequestDto requestDto) {
-        System.out.println("requestDto = " + requestDto.getUsername());
         return userService.signup(requestDto);
     }
 
     @PostMapping("/user/login")
-    public String login(@RequestBody LoginRequestDto requestDto, HttpServletResponse res) { // 두번쨰 매개변수 확인!!
+    public String login(@RequestBody LoginRequestDto requestDto, HttpServletResponse res) {
         return userService.login(requestDto, res);
     }
 }

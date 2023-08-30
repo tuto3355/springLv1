@@ -26,10 +26,6 @@ public class UserService {
 
     public String signup(SignupRequestDto requestDto) { //void리턴??
         String username = requestDto.getUsername();
-
-        System.out.println("requestDto.getUsername() = " + requestDto.getUsername());
-        System.out.println("requestDto.getPassword() = " + requestDto.getPassword());
-
         String password = passwordEncoder.encode(requestDto.getPassword());
 
         Optional<User> tmpUser = userRepository.findByUsername(username);
