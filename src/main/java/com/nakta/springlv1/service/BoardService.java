@@ -23,11 +23,7 @@ public class BoardService {
     public BoardResponseDto createBoard(BoardRequestDto requestDto, HttpServletRequest req) {
 
         //토큰 검증
-        String tokenValue = jwtUtil.getTokenFromRequest(req);
-        tokenValue = jwtUtil.substringToken(tokenValue);
-        if (!jwtUtil.validateToken(tokenValue)) {
-            throw new IllegalArgumentException("토큰이 유효하지 않음"); // jwtutil.validation에서 이미 오류하는데 또?
-        }
+        String tokenValue = validateToken(req);
 
         Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
         Board board = new Board(requestDto, info.getSubject()); //username을 따로 받기 위한 생성자 생성
@@ -86,7 +82,7 @@ public class BoardService {
         String tokenValue = jwtUtil.getTokenFromRequest(req);
         tokenValue = jwtUtil.substringToken(tokenValue);
         if (!jwtUtil.validateToken(tokenValue)) {
-            throw new IllegalArgumentException("토큰이 유효하지 않음"); // jwtutil.validation에서 이미 오류하는데 또?
+            throw new IllegalArgumentException("토큰이 유효하지 않음");
         }
         return tokenValue;
     }
