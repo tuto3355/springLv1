@@ -5,6 +5,7 @@ import com.nakta.springlv1.dto.BoardResponseDto;
 import com.nakta.springlv1.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,27 +21,27 @@ public class BoardController {
     }
 
     @PostMapping("/board")
-    public BoardResponseDto createBoard(@RequestBody BoardRequestDto requestDto, HttpServletRequest req) {
-        return boardService.createBoard(requestDto, req);
+    public ResponseEntity<BoardResponseDto> createBoard(@RequestBody BoardRequestDto requestDto, HttpServletRequest req) {
+        return ResponseEntity.ok(boardService.createBoard(requestDto, req));
     }
 
     @GetMapping("/board")
-    public List<BoardResponseDto> getAllBoard() {
-        return boardService.getAllBoard();
+    public ResponseEntity<List<BoardResponseDto>> getAllBoard() {
+        return ResponseEntity.ok(boardService.getAllBoard());
     }
     @GetMapping("/board/{id}")
-    public BoardResponseDto getOneBoard(@PathVariable Long id) {
-        return boardService.getOneBoard(id);
+    public ResponseEntity<BoardResponseDto> getOneBoard(@PathVariable Long id) {
+        return ResponseEntity.ok(boardService.getOneBoard(id));
     }
 
     @PutMapping("/board/{id}")
-    public BoardResponseDto modifyBoard(@PathVariable Long id, @RequestBody BoardRequestDto requestDto, HttpServletRequest req) {
-        return boardService.modifyBoard(id, requestDto, req);
+    public ResponseEntity<BoardResponseDto> modifyBoard(@PathVariable Long id, @RequestBody BoardRequestDto requestDto, HttpServletRequest req) {
+        return ResponseEntity.ok(boardService.modifyBoard(id, requestDto, req));
     }
 
     @DeleteMapping("/board/{id}")
-    public String deleteBoard(@PathVariable Long id, HttpServletRequest req) {
-        return boardService.deleteBoard(id, req);
+    public ResponseEntity<String> deleteBoard(@PathVariable Long id, HttpServletRequest req) {
+        return ResponseEntity.ok(boardService.deleteBoard(id, req));
     }
 
 }
