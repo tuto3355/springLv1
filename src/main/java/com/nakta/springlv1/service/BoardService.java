@@ -2,6 +2,7 @@ package com.nakta.springlv1.service;
 
 import com.nakta.springlv1.dto.BoardRequestDto;
 import com.nakta.springlv1.dto.BoardResponseDto;
+import com.nakta.springlv1.dto.StringResponseDto;
 import com.nakta.springlv1.entity.Board;
 import com.nakta.springlv1.jwt.JwtUtil;
 import com.nakta.springlv1.repository.BoardRepository;
@@ -46,40 +47,31 @@ public class BoardService {
     @Transactional
     public BoardResponseDto modifyBoard(Long id, BoardRequestDto requestDto, HttpServletRequest req) {
 
-
         //토큰 검증
-        String tokenValue = jwtUtil.getTokenFromRequest(req);
-        tokenValue = jwtUtil.substringToken(tokenValue);
-        if (!jwtUtil.validateToken(tokenValue)) {
-            throw new IllegalArgumentException("토큰이 유효하지 않음"); // jwtutil.validation에서 이미 오류하는데 또?
-        }
+        String tokenValue = validateToken(req);
 
         //작성자 일치 확인
         Board board = findById(id);
         Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
         if (info.getSubject().equals(board.getUsername())) {
-            board.update(requestDto,info.getSubject());
+            board.update(requestDto, info.getSubject());
             return new BoardResponseDto(board);
         } else {
             throw new IllegalArgumentException("작성자가 일치하지 않습니다");
         }
     }
 
-    public String deleteBoard(Long id, HttpServletRequest req) {
+    public StringResponseDto deleteBoard(Long id, HttpServletRequest req) {
 
         //토큰 검증
-        String tokenValue = jwtUtil.getTokenFromRequest(req);
-        tokenValue = jwtUtil.substringToken(tokenValue);
-        if (!jwtUtil.validateToken(tokenValue)) {
-            throw new IllegalArgumentException("토큰이 유효하지 않음"); // jwtutil.validation에서 이미 오류처리하는데 또?
-        }
+        String tokenValue = validateToken(req);
 
         //작성자 일치 확인
         Board board = findById(id);
         Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
         if (info.getSubject().equals(board.getUsername())) {
             boardRepository.deleteById(id);
-            return "{\"message\": \"삭제를 성공하였음\"}";
+            return new StringResponseDto("삭제를 성공하였음");
         } else {
             throw new IllegalArgumentException("작성자가 일치하지 않습니다");
         }
@@ -87,8 +79,15 @@ public class BoardService {
     }
 
     private Board findById(Long id) {
-        return boardRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("선택한 메모는 존재하지 않습니다.")
-        );
+        return boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 메모는 존재하지 않습니다."));
+    }
+
+    private String validateToken(HttpServletRequest req) {
+        String tokenValue = jwtUtil.getTokenFromRequest(req);
+        tokenValue = jwtUtil.substringToken(tokenValue);
+        if (!jwtUtil.validateToken(tokenValue)) {
+            throw new IllegalArgumentException("토큰이 유효하지 않음"); // jwtutil.validation에서 이미 오류하는데 또?
+        }
+        return tokenValue;
     }
 }

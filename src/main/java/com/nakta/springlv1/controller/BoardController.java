@@ -2,6 +2,7 @@ package com.nakta.springlv1.controller;
 
 import com.nakta.springlv1.dto.BoardRequestDto;
 import com.nakta.springlv1.dto.BoardResponseDto;
+import com.nakta.springlv1.dto.StringResponseDto;
 import com.nakta.springlv1.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class BoardController {
     }
 
     @DeleteMapping("/board/{id}")
-    public ResponseEntity<String> deleteBoard(@PathVariable Long id, HttpServletRequest req) {
+    public ResponseEntity<StringResponseDto> deleteBoard(@PathVariable Long id, HttpServletRequest req) {
         return ResponseEntity.ok(boardService.deleteBoard(id, req));
     }
 
