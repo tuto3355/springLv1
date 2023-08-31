@@ -1,6 +1,6 @@
-package com.nakta.springlv1.repository;
+package com.nakta.springlv1.user.repository;
 
-import com.nakta.springlv1.entity.User;
+import com.nakta.springlv1.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

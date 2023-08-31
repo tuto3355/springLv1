@@ -1,6 +1,6 @@
-package com.nakta.springlv1.repository;
+package com.nakta.springlv1.board.repository;
 
-import com.nakta.springlv1.entity.Board;
+import com.nakta.springlv1.board.entity.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

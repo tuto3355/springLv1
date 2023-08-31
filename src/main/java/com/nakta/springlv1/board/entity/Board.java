@@ -1,6 +1,6 @@
-package com.nakta.springlv1.entity;
+package com.nakta.springlv1.board.entity;
 
-import com.nakta.springlv1.dto.BoardRequestDto;
+import com.nakta.springlv1.board.dto.BoardRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

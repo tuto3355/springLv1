@@ -1,4 +1,4 @@
-package com.nakta.springlv1.jwt;
+package com.nakta.springlv1.user.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

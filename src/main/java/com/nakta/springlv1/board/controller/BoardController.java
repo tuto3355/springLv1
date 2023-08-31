@@ -1,9 +1,9 @@
-package com.nakta.springlv1.controller;
+package com.nakta.springlv1.board.controller;
 
-import com.nakta.springlv1.dto.BoardRequestDto;
-import com.nakta.springlv1.dto.BoardResponseDto;
-import com.nakta.springlv1.dto.StringResponseDto;
-import com.nakta.springlv1.service.BoardService;
+import com.nakta.springlv1.board.dto.BoardRequestDto;
+import com.nakta.springlv1.board.dto.BoardResponseDto;
+import com.nakta.springlv1.user.dto.StringResponseDto;
+import com.nakta.springlv1.board.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

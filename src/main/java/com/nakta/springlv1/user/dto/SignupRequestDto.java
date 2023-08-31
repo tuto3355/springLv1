@@ -1,4 +1,4 @@
-package com.nakta.springlv1.dto;
+package com.nakta.springlv1.user.dto;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

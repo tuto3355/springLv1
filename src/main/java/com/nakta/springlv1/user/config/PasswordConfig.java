@@ -1,4 +1,4 @@
-package com.nakta.springlv1.config;
+package com.nakta.springlv1.user.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

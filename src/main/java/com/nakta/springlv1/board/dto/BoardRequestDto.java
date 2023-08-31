@@ -1,4 +1,4 @@
-package com.nakta.springlv1.dto;
+package com.nakta.springlv1.board.dto;
 
 import lombok.Getter;
 

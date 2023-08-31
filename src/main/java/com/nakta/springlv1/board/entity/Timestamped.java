@@ -1,4 +1,4 @@
-package com.nakta.springlv1.entity;
+package com.nakta.springlv1.board.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

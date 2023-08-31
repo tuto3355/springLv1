@@ -1,9 +1,9 @@
-package com.nakta.springlv1.controller;
+package com.nakta.springlv1.user.controller;
 
-import com.nakta.springlv1.dto.LoginRequestDto;
-import com.nakta.springlv1.dto.SignupRequestDto;
-import com.nakta.springlv1.dto.StringResponseDto;
-import com.nakta.springlv1.service.UserService;
+import com.nakta.springlv1.user.dto.LoginRequestDto;
+import com.nakta.springlv1.user.dto.SignupRequestDto;
+import com.nakta.springlv1.user.dto.StringResponseDto;
+import com.nakta.springlv1.user.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

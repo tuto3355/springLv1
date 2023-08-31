@@ -1,6 +1,6 @@
-package com.nakta.springlv1.dto;
+package com.nakta.springlv1.board.dto;
 
-import com.nakta.springlv1.entity.Board;
+import com.nakta.springlv1.board.entity.Board;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

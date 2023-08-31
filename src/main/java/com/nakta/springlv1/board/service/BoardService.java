@@ -1,11 +1,11 @@
-package com.nakta.springlv1.service;
+package com.nakta.springlv1.board.service;
 
-import com.nakta.springlv1.dto.BoardRequestDto;
-import com.nakta.springlv1.dto.BoardResponseDto;
-import com.nakta.springlv1.dto.StringResponseDto;
-import com.nakta.springlv1.entity.Board;
-import com.nakta.springlv1.jwt.JwtUtil;
-import com.nakta.springlv1.repository.BoardRepository;
+import com.nakta.springlv1.board.dto.BoardRequestDto;
+import com.nakta.springlv1.board.dto.BoardResponseDto;
+import com.nakta.springlv1.user.dto.StringResponseDto;
+import com.nakta.springlv1.board.entity.Board;
+import com.nakta.springlv1.user.jwt.JwtUtil;
+import com.nakta.springlv1.board.repository.BoardRepository;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

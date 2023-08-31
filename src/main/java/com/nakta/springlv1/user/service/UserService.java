@@ -1,11 +1,11 @@
-package com.nakta.springlv1.service;
+package com.nakta.springlv1.user.service;
 
-import com.nakta.springlv1.dto.LoginRequestDto;
-import com.nakta.springlv1.dto.SignupRequestDto;
-import com.nakta.springlv1.dto.StringResponseDto;
-import com.nakta.springlv1.entity.User;
-import com.nakta.springlv1.jwt.JwtUtil;
-import com.nakta.springlv1.repository.UserRepository;
+import com.nakta.springlv1.user.dto.LoginRequestDto;
+import com.nakta.springlv1.user.dto.SignupRequestDto;
+import com.nakta.springlv1.user.dto.StringResponseDto;
+import com.nakta.springlv1.user.entity.User;
+import com.nakta.springlv1.user.jwt.JwtUtil;
+import com.nakta.springlv1.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
