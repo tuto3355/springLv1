@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface BoardRepository extends JpaRepository<Board,Long> {
     public List<Board> findAllByOrderByModifiedAtDesc();
-//    public Board findAllByTitleOrderByCreatedAtAsc(String title);
 }

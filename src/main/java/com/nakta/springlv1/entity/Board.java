@@ -9,7 +9,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "board")
 @Getter
-@Setter
 @NoArgsConstructor
 
 public class Board extends Timestamped {
@@ -22,12 +21,6 @@ public class Board extends Timestamped {
     private String username;
     @Column(name = "content", nullable = false, length = 500)
     private String content;
-
-    public Board(BoardRequestDto requestDto) {
-        this.title = requestDto.getTitle();
-        this.username = requestDto.getUsername();
-        this.content = requestDto.getContent();
-    }
 
     public Board(BoardRequestDto requestDto, String subject) {
         this.title = requestDto.getTitle();

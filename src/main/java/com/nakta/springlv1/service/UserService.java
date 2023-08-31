@@ -2,6 +2,7 @@ package com.nakta.springlv1.service;
 
 import com.nakta.springlv1.dto.LoginRequestDto;
 import com.nakta.springlv1.dto.SignupRequestDto;
+import com.nakta.springlv1.dto.StringResponseDto;
 import com.nakta.springlv1.entity.User;
 import com.nakta.springlv1.jwt.JwtUtil;
 import com.nakta.springlv1.repository.UserRepository;
@@ -24,7 +25,7 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
-    public String signup(SignupRequestDto requestDto) { //void리턴??
+    public StringResponseDto signup(SignupRequestDto requestDto) { //void리턴??
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
 
@@ -34,11 +35,11 @@ public class UserService {
         }
         User user = new User(username,password);
         userRepository.save(user);
-        return "새로운 아이디 저장 성공 ㅋㅋ";
+        return new StringResponseDto( "새로운 아이디 저장 성공 ㅋㅋ");
 
     }
 
-    public String login(LoginRequestDto requestDto, HttpServletResponse res) {
+    public StringResponseDto login(LoginRequestDto requestDto, HttpServletResponse res) {
         String username = requestDto.getUsername();
         String password = requestDto.getPassword();
 
@@ -51,7 +52,7 @@ public class UserService {
         }
         String token = jwtUtil.createToken(user.getUsername());
         jwtUtil.addJwtToCookie(token, res);
-        return "로그인 성공 ㅋㅋ";
+        return new StringResponseDto("로그인 성공 ㅋㅋ");
 
     }
 }
