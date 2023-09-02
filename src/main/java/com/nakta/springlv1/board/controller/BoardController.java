@@ -6,6 +6,7 @@ import com.nakta.springlv1.user.dto.StringResponseDto;
 import com.nakta.springlv1.board.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

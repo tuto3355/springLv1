@@ -4,6 +4,8 @@ import com.nakta.springlv1.user.dto.LoginRequestDto;
 import com.nakta.springlv1.user.dto.SignupRequestDto;
 import com.nakta.springlv1.user.dto.StringResponseDto;
 import com.nakta.springlv1.user.entity.User;
+import com.nakta.springlv1.user.errorcode.UserErrorCode;
+import com.nakta.springlv1.error.exception.CustomException;
 import com.nakta.springlv1.user.jwt.JwtUtil;
 import com.nakta.springlv1.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,7 +33,7 @@ public class UserService {
 
         Optional<User> tmpUser = userRepository.findByUsername(username);
         if (tmpUser.isPresent()) {
-            throw new IllegalArgumentException("중복된 아이디입니다");
+            throw new CustomException(UserErrorCode.DUPLICATED_ID);
         }
         User user = new User(username,password);
         userRepository.save(user);
@@ -44,11 +46,11 @@ public class UserService {
         String password = requestDto.getPassword();
 
         User user = userRepository.findByUsername(username).orElseThrow(
-                ()-> new IllegalArgumentException("일치하는 아이디가 없습니다")
+                ()-> new CustomException(UserErrorCode.ID_NOT_FOUND)
         );
         
         if (!passwordEncoder.matches(password,user.getPassword())) {
-            throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
+            throw new CustomException(UserErrorCode.PASSWORD_NOT_MATCH);
         }
         String token = jwtUtil.createToken(user.getUsername());
         jwtUtil.addJwtToCookie(token, res);
